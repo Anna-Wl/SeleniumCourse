@@ -66,13 +66,12 @@ public class Zadanie8 {
         String cartItemsTotalLocator = "//*[@id=\"_desktop_cart\"]/div/div/a/span[2]";
 
 
-            //Wybieram rozmiar
-            WebElement sizeDropdown = driver.findElement(By.id(sizeDropdownLocator));
-            Select sizeDropdownSelect = new Select(sizeDropdown);
-            sizeDropdownSelect.selectByVisibleText(sizeTest);
+        //Wybieram rozmiar
+        WebElement sizeDropdown = driver.findElement(By.id(sizeDropdownLocator));
+        Select sizeDropdownSelect = new Select(sizeDropdown);
+        sizeDropdownSelect.selectByVisibleText(sizeTest);
 
-
-            // Wybieram color
+        // Wybieram color
         //wybieram ktory kolor
         String colorsLocator = "sr-only";
         List<WebElement> colors = driver.findElements(By.className(colorsLocator));
@@ -106,12 +105,10 @@ public class Zadanie8 {
         addToCart.click();
         Thread.sleep(2000);
 
-        //Ilosc produktow w koszyku
+        //Zapisuje w zmiennej ilosc produktow w koszyku
         WebElement cartItemsTotal = driver.findElement(By.xpath(cartItemsTotalLocator));
         String cartItemsTotalText = cartItemsTotal.getText();
         String cartItemsTotalTextWanted= cartItemsTotalText.replaceAll("[\\(\\)\\[\\]\\{\\}]","");
-
-
 
         //Otwiera sie modal window
         //LEWA STRONA
@@ -144,8 +141,6 @@ public class Zadanie8 {
         String productSizeModalText = productSizeModal.getText();
         String productSizeModalTextLast = getLastText(productSizeModalText, " ");
         System.out.println(productSizeModalTextLast);
-//        String[] bits = productSizeModalText.split(" ");
-//        String productSizeModalTextLast = bits[bits.length-1];
         if(sizeTest.equals(productSizeModalTextLast)) {
             System.out.println("sizeTest on modal window pass");
         } else {
@@ -205,7 +200,7 @@ public class Zadanie8 {
         System.out.println(titleIndexCart);
 
 
-        //Sprawdzenie czy poprawna jest cena wysciowa pojedynczego produktu
+        //Sprawdzenie czy poprawna jest cena wyjsciowa pojedynczego produktu
         String productPriceCartLocator = "current-price";
         List<WebElement> productPriceCart = driver.findElements(By.className(productPriceCartLocator));
         int priceIndexCart = -1;
