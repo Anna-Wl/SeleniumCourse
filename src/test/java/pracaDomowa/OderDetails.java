@@ -6,19 +6,45 @@ import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 
-public class Zadanie8 {
+class OrderDetails {
     public static void main(String[] args) throws InterruptedException {
-        //Wartosci testowe
+        //Wartosci testowe dla produktu
         String productNameTestRaw = "Hummingbird Printed T-Shirt";
         String sizeTest = "M";
         String colorTest = "Black";
         String priceEmbeded = "";
         int numberOfItemsTest = 2;
 
-
         //Wartosci testowe lowercase
         String productNameTest = productNameTestRaw.toLowerCase();
+
+        //Wartosci testowe do sekcji 1  - Personal Information
+        String firstNameTest = "Jan";
+        String lastNameTest = "Kowalski";
+        String emailTest = "";
+        String passwordTest = "pass123";
+        String userBirthdayTest = "02/22/1998";
+
+        //Wartosci testowe do sekcji 2 'Address'
+        String companyNameTest = "ABC";
+        String numberVATTest = " PL1234567890";
+        String addressTest = "Polna 12";
+        String zipPostalCodeTest = "88-100";
+        String cityTest = "Warszawa";
+        String countryTest = "United Kingdom";
+        String phoneTest = "775-55-555";
+
+        //Wartosci testowe do sekcji 3 'Shipping Method'
+        String commentTest = "Black color please";
+
+        //Losowy email address
+        Random random = new Random();
+        int randomInteger = random.nextInt(50); //losuje liczby z przedziału 0 - 49
+        emailTest = "test" + randomInteger + "@test2.com";
+        System.out.println(emailTest);
+
 
         //Uruchomienie przegladarki
         System.setProperty("webdriver.chrome.driver",
@@ -54,7 +80,7 @@ public class Zadanie8 {
         //Jestem na stronie produktu
         String sizeDropdownLocator = "group_1";
         String colorLocator = "//*[@id=\"group_2\"]/li[2]/label/input";
-       // String qtyUpButtonLocator = "//*[@id=\"add-to-cart-or-refresh\"]/div[2]/div/div[1]/div/span[3]/button[1]";
+        // String qtyUpButtonLocator = "//*[@id=\"add-to-cart-or-refresh\"]/div[2]/div/div[1]/div/span[3]/button[1]";
         String qtyFieldLocator = "quantity_wanted";
         String qtyUpButtonLocator = "#add-to-cart-or-refresh div.product-add-to-cart div div.qty div span.input-group-btn-vertical button.btn.btn-touchspin.js-touchspin.bootstrap-touchspin-up";
         String addToCartLocator = "//*[@id=\"add-to-cart-or-refresh\"]/div[2]/div/div[2]/button";
@@ -257,6 +283,121 @@ public class Zadanie8 {
         //Sprwadzenie calkowitej iloci produktow
         //Sprawdzenie calkowitej ceny przed shipping
         //Sprawdzneie calkowitej ceny po shipping
+
+
+        //Klikniecie przycisku 'Proceed to checkout' na stronie Karty
+        String proceedToCeckoutButtonCartLocator = "//*[@id=\"main\"]/div/div[2]/div[1]/div[2]/div/a";
+        WebElement proceedToCeckoutButtonCart = driver.findElement(By.xpath(proceedToCeckoutButtonCartLocator));
+        proceedToCeckoutButtonCart.click();
+
+        //Jestem na stronie order details
+        //Wypelniam Sekcja 1 - 'Personal Information Details' za pomoca danych testowych
+        String socialTitleOrderLocator = "//*[@id=\"customer-form\"]/section/div[1]/div[1]/label[1]/span/input";
+        String firstNameOrderLocator = "//*[@id=\"customer-form\"]/section/div[2]/div[1]/input";
+        String lastNameOrderLocator = "//*[@id=\"customer-form\"]/section/div[3]/div[1]/input";
+        String emailOrderLocator = "//*[@id=\"customer-form\"]/section/div[4]/div[1]/input";
+        String passwordOrderLocator = "//*[@id=\"customer-form\"]/section/div[5]/div[1]/div/input";
+        String userBirthdayOrderLocator = "//*[@id=\"customer-form\"]/section/div[6]/div[1]/input";
+        String receiveOffersCheckboxOrderLocator = "//*[@id=\"customer-form\"]/section/div[7]/div[1]/span/label/input";
+        String signUpForNewsletterOrderLocator = "//*[@id=\"customer-form\"]/section/div[8]/div[1]/span/label/input";
+        String continuePersolanInfoButtonOrderLocator = "//*[@id=\"customer-form\"]/footer/button";
+
+        WebElement socialTitleOrder = driver.findElement(By.xpath(socialTitleOrderLocator));
+        socialTitleOrder.click();
+        WebElement firstNameOrder = driver.findElement(By.xpath(firstNameOrderLocator));
+        firstNameOrder.sendKeys(firstNameTest);
+        WebElement lastNameOrder = driver.findElement(By.xpath(lastNameOrderLocator));
+        lastNameOrder.sendKeys(lastNameTest);
+        WebElement emailOrder = driver.findElement(By.xpath(emailOrderLocator));
+        emailOrder.sendKeys(emailTest);
+        WebElement passwordOrder = driver.findElement(By.xpath(passwordOrderLocator));
+        passwordOrder.sendKeys(passwordTest);
+        WebElement userBirthdayOrder = driver.findElement(By.xpath(userBirthdayOrderLocator));
+        userBirthdayOrder.sendKeys(userBirthdayTest);
+        WebElement receiveOffersCheckboxOrder = driver.findElement(By.xpath(receiveOffersCheckboxOrderLocator));
+        receiveOffersCheckboxOrder.click();
+        WebElement signUpForNewsletterOrder = driver.findElement(By.xpath(signUpForNewsletterOrderLocator));
+        signUpForNewsletterOrder.click();
+        WebElement continuePersolanInfoButtonOrder = driver.findElement(By.xpath(continuePersolanInfoButtonOrderLocator));
+        continuePersolanInfoButtonOrder.click();
+
+        //Wypelniam Sekcja 2 - address details za pomoca danych testowych
+        String companyOrderLocator = "//*[@id=\"delivery-address\"]/div/section/div[3]/div[1]/input";
+        String numberVATOrderLocator = "//*[@id=\"delivery-address\"]/div/section/div[4]/div[1]/input";
+        String addressOrderLocator = "//*[@id=\"delivery-address\"]/div/section/div[5]/div[1]/input";
+        String zipPostalCodeOrderLocator = "//*[@id=\"delivery-address\"]/div/section/div[7]/div[1]/input";
+        String cityOrderLocator = "//*[@id=\"delivery-address\"]/div/section/div[8]/div[1]/input";
+        String countryOrderLocator = "//*[@id=\"delivery-address\"]/div/section/div[9]/div[1]/select";
+        String phoneOrderLocator = "//*[@id=\"delivery-address\"]/div/section/div[10]/div[1]/input";
+        String useThisAddressCheckboxOrderLocator = "#checkout-addresses-step div div form section div:nth-child(16) div input";
+        String continueAddressButtonOrderLocator = "#checkout-addresses-step  div div form footer button";
+        String cancelAddressButtonOrderLocator = "//*[@id=\"invoice-address\"]/div/footer/a";
+        String continueAddressButtonSecondOrderLocator = "#checkout-addresses-step div div form div.clearfix button";
+        String commentTextareaOrderLocator = "delivery_message";
+        String continueShippingMethodButtonOrderLocator = "//*[@id=\"js-delivery\"]/button";
+        String payByBankWireCheckboxOrderLocator = "//*[@id=\"payment-option-2-container\"]/label";
+        String termsOfServiceCheckboxOrderLocator = "//*[@id=\"conditions_to_approve[terms-and-conditions]\"]";
+        String orderWithAnObligationButtonOrderLocator = "//*[@id=\"payment-confirmation\"]/div[1]/button";
+
+        WebElement companyOrder = driver.findElement(By.xpath(companyOrderLocator));
+        companyOrder.sendKeys(companyNameTest);
+        WebElement numberVATOrder = driver.findElement(By.xpath(numberVATOrderLocator));
+        numberVATOrder.sendKeys(numberVATTest);
+        WebElement addressOrder = driver.findElement(By.xpath(addressOrderLocator));
+        addressOrder.sendKeys(addressTest);
+        WebElement zipPostalCodeOrder = driver.findElement(By.xpath(zipPostalCodeOrderLocator));
+        zipPostalCodeOrder.sendKeys(zipPostalCodeTest);
+        WebElement cityOrder = driver.findElement(By.xpath(cityOrderLocator));
+        cityOrder.sendKeys(cityTest);
+        Select countryOrderSelect = new Select(driver.findElement(By.xpath(countryOrderLocator)));
+        countryOrderSelect.selectByVisibleText(countryTest);
+        WebElement phoneOrder = driver.findElement(By.xpath(phoneOrderLocator));
+        phoneOrder.sendKeys(phoneTest);
+        WebElement useThisAddressCheckboxOrder = driver.findElement(By.cssSelector(useThisAddressCheckboxOrderLocator));
+        if(useThisAddressCheckboxOrder.isSelected()) {
+            System.out.println("is selected");
+            useThisAddressCheckboxOrder.click();
+        } else {
+            System.out.println("Keep checkbox unchecked");
+        }
+        WebElement continueAddressButtonOrder = driver.findElement(By.cssSelector(continueAddressButtonOrderLocator));
+        continueAddressButtonOrder.click();
+        WebElement cancelAddressButtonOrder =driver.findElement(By.xpath(cancelAddressButtonOrderLocator));
+        cancelAddressButtonOrder.click();
+        WebElement continueAddressButtonSecondOrder = driver.findElement(By.cssSelector(continueAddressButtonSecondOrderLocator));
+        continueAddressButtonSecondOrder.click();
+
+        //Jestem w Sekcji - Shipping Method
+
+        WebElement commentTextareaOrder = driver.findElement(By.id(commentTextareaOrderLocator));
+        commentTextareaOrder.sendKeys(commentTest);
+        WebElement continueShippingMethodButtonOrder = driver.findElement(By.xpath(continueShippingMethodButtonOrderLocator));
+        continueShippingMethodButtonOrder.click();
+
+        //Jestem w Sekcji - Payment
+        WebElement payByBankWireCheckbox = driver.findElement(By.xpath(payByBankWireCheckboxOrderLocator));
+        payByBankWireCheckbox.click();
+        WebElement termsOfServiceCheckboxOrder = driver.findElement(By.xpath(termsOfServiceCheckboxOrderLocator));
+        WebElement orderWithAnObligationButtonOrder = driver.findElement(By.xpath(orderWithAnObligationButtonOrderLocator));
+
+        if(!orderWithAnObligationButtonOrder.isEnabled()) {
+            termsOfServiceCheckboxOrder.click();
+            orderWithAnObligationButtonOrder.click();
+        } else {
+            System.out.println("niedziala order");
+        }
+
+        //Jestem na stronie 'Your Order is Confirmed'
+        //Sprawdzenie czy jest poprawny image
+        //Sprawdzenie czy jest poprawna nazwa
+        //Sprawdzenie czy jest poprawny rozmiar
+        //Sprawdzenie czy jest poprawny kolor
+        //Sprawdzneie czy jest poprawna cena wyjsciowa produktu
+        //Sprawdzenie czy jest poprawna ilosc danego produktu
+        //Spradzenie czy jest poprawna calkowita cena dla produktu
+
+
+
     }
 
 

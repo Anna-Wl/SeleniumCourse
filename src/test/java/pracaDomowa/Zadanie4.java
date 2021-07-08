@@ -29,7 +29,7 @@ public class Zadanie4 {
         WebElement password = driver.findElement(By.xpath(passwordLocator));
         WebElement showButton = driver.findElement(By.xpath(showButtonLocator));
         showButton.click();
-        WebElement birthday = driver.findElement(By.xpath(showButtonLocator));
+        WebElement birthday = driver.findElement(By.xpath(birthdayLocator));
     }
 }
 

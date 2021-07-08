@@ -1,12 +1,11 @@
 package pracaDomowa;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
 
 public class Zadanie3 {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         String firstNameLocator = "first-name";
         String lastNameLocator = "last-name";
         String genderLocator = "#infoForm div:nth-child(3) div div label:nth-child(1)";
@@ -18,6 +17,11 @@ public class Zadanie3 {
         String commentLocator = "comment";
         String submitButtonLocator = "submit";
         String submitMsgLocator = "submit-msg";
+        String roleLocator = "role";
+        String challengingJobOptionLocator = "//*[@id=\"expectation\"]/option[6]";
+        String highSalaryJoOptionLocator = "//*[@id=\"expectation\"]/option[1]";
+        String onlineCoursesWaysOfDevLocator = "//*[@id=\"infoForm\"]/div[11]/div/div[2]/label/input";
+        String readBlogsWaysOfDevLocator = "//*[@id=\"infoForm\"]/div[11]/div/div[5]/label/input";
 
         System.setProperty("webdriver.chrome.driver",
                 "src/main/resources/drivers/chromedriver.exe");
@@ -43,6 +47,23 @@ public class Zadanie3 {
         password.sendKeys("password");
         WebElement company = driver.findElement(By.id(companyLocator));
         company.sendKeys("Coders Lab");
+        WebElement role = driver.findElement(By.id(roleLocator));
+        Select roleSelect = new Select(role);
+        roleSelect.selectByVisibleText("QA");
+
+        WebElement challengingJobOption = driver.findElement(By.xpath(challengingJobOptionLocator));
+        WebElement highSalaryJoOption = driver.findElement(By.xpath(highSalaryJoOptionLocator));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", highSalaryJoOption);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", challengingJobOption);
+        System.out.println(highSalaryJoOption.getText());
+        System.out.println(challengingJobOption.getText());
+        Thread.sleep(500);
+
+        WebElement onlineCoursesWaysOfDev = driver.findElement(By.xpath(onlineCoursesWaysOfDevLocator));
+        onlineCoursesWaysOfDev.click();
+        WebElement readBlogsWaysOfDev = driver.findElement(By.xpath(readBlogsWaysOfDevLocator));
+        readBlogsWaysOfDev.click();
+
         WebElement comment = driver.findElement(By.id(commentLocator));
         comment.sendKeys("To jest mój pierwszy automat testowy");
         WebElement submitButton = driver.findElement(By.id(submitButtonLocator));

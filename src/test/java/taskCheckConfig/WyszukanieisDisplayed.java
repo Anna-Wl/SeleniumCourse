@@ -16,7 +16,7 @@ public class WyszukanieisDisplayed {
         String passwordLocator = "//*[@id=\"passwd\"]";
         String registerButtonLocator = "//*[@id=\"submitAccount\"]";
 
-        String emailToTest = "testf2ds3456fd78dd12e1232d224@test2.com";
+        String emailToTest = "testf2ds3456fd78dd12e1232dd3224@test2.com";
 
         String myPersonalInformationLocator = "#center_column div div ul li:nth-child(4) a span";
         String myAddressLocator = "#center_column div div ul li:nth-child(5) a span";
