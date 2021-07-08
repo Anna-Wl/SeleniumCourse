@@ -14,7 +14,7 @@ public class Zadanie8 {
         String sizeTest = "M";
         String colorTest = "Black";
         String priceEmbeded = "";
-        int itemNumber = 2;
+        int numberOfItemsTest = 2;
 
 
         //Wartosci testowe lowercase
@@ -96,7 +96,7 @@ public class Zadanie8 {
 
         //Wybieram ilosc
         WebElement qtyUpButton = driver.findElement(By.cssSelector(qtyUpButtonLocator));
-        for(int i = 0; i < itemNumber-1 ; i++) {
+        for(int i = 0; i < numberOfItemsTest-1 ; i++) {
             qtyUpButton.click();
         }
 
@@ -105,7 +105,7 @@ public class Zadanie8 {
         addToCart.click();
         Thread.sleep(2000);
 
-        //Zapisuje w zmiennej ilosc produktow w koszyku
+        //Zapisuje w zmiennej calkowita ilosc produktow w koszyku
         WebElement cartItemsTotal = driver.findElement(By.xpath(cartItemsTotalLocator));
         String cartItemsTotalText = cartItemsTotal.getText();
         String cartItemsTotalTextWanted= cartItemsTotalText.replaceAll("[\\(\\)\\[\\]\\{\\}]","");
@@ -158,8 +158,19 @@ public class Zadanie8 {
             System.out.println("colorTest on modal window fail");
         }
 
-        //Sprawdzenie czy poprawna jest ilosc
-        //Jak to przetestowac ?????? To czyta z local storage
+        //Sprawdzenie czy ilosc wybranych produktow jest zgodna z danymi testowymi
+        String productQtyModalLocator = "//*[@id=\"blockcart-modal\"]/div/div/div[2]/div/div[1]/div/div[2]/p[2]";
+        WebElement productQtyModal = driver.findElement(By.xpath(productQtyModalLocator));
+        String productQtyModalText = productQtyModal.getText();
+        System.out.println("QTY" + productQtyModal.getText());
+        String productQtyModalTextLast =  getLastText(productQtyModalText, "");
+        System.out.println(productQtyModalTextLast);
+        int productQtyModalTextLastToNumber = Integer.parseInt(productQtyModalTextLast);
+        if(productQtyModalTextLastToNumber == numberOfItemsTest) {
+            System.out.println("Product qty correct");
+        } else {
+            System.out.println("Product qty incorrect");
+        }
 
         //PRAWA STRONA
         //Sprawdzenie poprawnosci ilosci rzeczy w koszyku
@@ -235,18 +246,6 @@ public class Zadanie8 {
             }
         }
 
-//        WebElement productSizeCart = driver.findElement(By.cssSelector(productSizeCartLocator));
-//        String productSizeCartText = productSizeModal.getText();
-//        String productSizeCartTextLast = getLastText(productSizeModalText, " ");
-//        System.out.println(productSizeCartTextLast);
-////        String[] bits = productSizeModalText.split(" ");
-////        String productSizeModalTextLast = bits[bits.length-1];
-//        if(sizeTest.equals(productSizeCartTextLast)) {
-//            System.out.println("sizeTest on modal window pass");
-//        } else {
-//            System.out.println("sizeTest on modal window fail");
-//        }
-
         //Sprawdzenie czy poprawny jest color
 
         //Sprawdzenie czy poprawna jest ilosc
@@ -256,7 +255,7 @@ public class Zadanie8 {
 
         //PRAWA STRONA
         //Sprwadzenie calkowitej iloci produktow
-        //Sprawdzenie calkowitej ceny prze shipping
+        //Sprawdzenie calkowitej ceny przed shipping
         //Sprawdzneie calkowitej ceny po shipping
     }
 
