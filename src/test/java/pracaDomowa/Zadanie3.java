@@ -50,7 +50,7 @@ public class Zadanie3 {
         WebElement submitMsg = driver.findElement(By.id(submitMsgLocator));
         String submitMsgText = submitMsg.getText().trim();
         System.out.println(submitMsgText);
-        if(submitMsgText == "Successfully submitted!") {
+        if(submitMsgText.equals("Successfully submitted!")) {
             System.out.println("Successfully submitted!");
         } else {
             System.out.println("Not submitted!");
